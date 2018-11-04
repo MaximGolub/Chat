@@ -1,0 +1,24 @@
+﻿@using Chat.Models
+@model ChatModel
+
+@Styles.Render("~/Content/Site.css")
+
+<div id="RefreshArea">
+    @{
+        Html.RenderPartial("History", Model);
+    }
+</div>
+
+@Ajax.ActionLink("ActionLink", "Index", new { user = "", logOn = "", logOff = "", chatMessage = "" },
+new AjaxOptions { UpdateTargetId = "RefreshArea", OnSuccess = "ChatOnSuccess", OnFailure = "ChatOnFailure" },
+new { @id = "ActionLink", @style = "visibility:hidden;" })
+
+<div id="inputForm">
+    <div>
+        <textarea id="txtMessage" rows="5" cols="50"></textarea>
+    </div>
+    <div>
+        <button id="btnMessage" value="Отправить">Отправить</button>
+        <button id="btnLogOff" value="Выйти">Выйти</button>
+    </div>
+</div>
